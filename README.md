@@ -2,7 +2,7 @@
 ### Clone Repository (All)
 Install git:
 ```
-sudo apt install git
+sudo apt install -y git
 ```
 Clone the repository:
 ```
@@ -25,7 +25,7 @@ wget -qO - https://dl.xanmod.org/check_x86-64_psabi.sh | awk -f -
 ```
 Install the kernel:
 ```
-sudo apt update && sudo apt dist-upgrade && sudo apt install linux-xanmod-x64v3
+sudo apt update -y && sudo apt dist-upgrade -y && sudo apt install -y linux-xanmod-x64v3
 ```
 Reboot to switch the kernel:
 ```
@@ -50,7 +50,7 @@ sudo sysctl -p
 ### Install UFW (All)
 Install ufw:
 ```
-sudo apt install ufw
+sudo apt install -y ufw
 ```
 Deny incoming:
 ```
@@ -133,6 +133,15 @@ sudo certbot certonly \
   -d yourdomain.com -d *.yourdomain.com \
   -n --agree-tos --no-eff-email -m your@email.com
 ```
+### Install WARP (All)
+Get WARP+ license (optional):
+```
+https://t.me/warpplus
+```
+Run the installation script:
+```
+cd && bash <(curl -fsSL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh) w
+```
 ### Install Marzban (Master)
 Run the installation script:
 ```
@@ -154,7 +163,11 @@ Adjust Nginx configuration:
 ```
 sudo nano /opt/marzban/nginx.conf
 ```
-
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-master.conf#L13
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-master.conf#L57
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-master.conf#L59
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-master.conf#L85-L86
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-master.conf#L100
 Adjust Marzban environment variables:
 ```
 sudo nano /opt/marzban/.env
@@ -181,16 +194,10 @@ Adjust Xray configuration:
 ```
 sudo nano /var/lib/marzban/xray_config.json
 ```
-
-### Install WARP (All)
-Get WARP+ license (optional):
-```
-https://t.me/warpplus
-```
-Run the installation script:
-```
-cd && bash <(curl -fsSL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh) w
-```
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/xray_config.json#L34
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/xray_config.json#L36
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/xray_config.json#L71
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/xray_config.json#L73
 ### Configure Marzban (Master)
 Restart Marzban:
 ```
@@ -209,6 +216,7 @@ Adjust host settings:
 reality-master
 address: master_ipv4
 port: 443
+
 reality-node
 address: node_ipv4
 port: 443
@@ -238,9 +246,11 @@ sudo cp ~/Marzban-Node-Guide/nginx-node.conf /opt/marzban-node/nginx.conf
 ```
 Adjust Nginx configuration:
 ```
-sudo nano /opt/marzban/nginx.conf
+sudo nano /opt/marzban-node/nginx.conf
 ```
-
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-node.conf#L13
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-node.conf#L66-L67
+https://github.com/strohsnow/Marzban-Node-Guide/blob/87daac18a909d64bd8b59b46462910e026044750/nginx-node.conf#L81
 Restart Marzban Node:
 ```
 sudo marzban-node restart

@@ -1,0 +1,166 @@
+{
+    "log": {
+        "access": "/var/lib/marzban/access.log",
+        "error": "/var/lib/marzban/error.log"
+    },
+    "dns": {
+        "servers": [
+            "tcp+local://1.1.1.1",
+            "tcp+local://1.0.0.1"
+        ],
+        "disableCache": true
+    },
+    "inbounds": [
+        {
+            "tag": "reality-master",
+            "listen": "127.0.0.1",
+            "port": 11000,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {
+                    "acceptProxyProtocol": true
+                },
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "target": 10000,
+                    "xver": 1,
+                    "serverNames": [
+                        "master.yourdomain.com"
+                    ],
+                    "privateKey": "MASTER_PRIVATE_KEY",
+                    "shortIds": [
+                        ""
+                    ]
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "reality-node",
+            "listen": "127.0.0.1",
+            "port": 12000,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {
+                    "acceptProxyProtocol": true
+                },
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "target": 10000,
+                    "xver": 1,
+                    "serverNames": [
+                        "node.yourdomain.com"
+                    ],
+                    "privateKey": "NODE_PRIVATE_KEY",
+                    "shortIds": [
+                        ""
+                    ]
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {}
+        },
+        {
+            "tag": "block",
+            "protocol": "blackhole",
+            "settings": {}
+        },
+        {
+            "tag": "dns-out",
+            "protocol": "dns",
+            "settings": {
+                "nonIPQuery": "skip"
+            }
+        },
+        {
+            "tag": "warp",
+            "protocol": "socks",
+            "settings": {
+                "servers": [
+                    {
+                        "address": "127.0.0.1",
+                        "port": 40000
+                    }
+                ]
+            }
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "type": "field",
+                "outboundTag": "dns-out",
+                "network": "tcp,udp",
+                "port": 53
+            },
+            {
+                "type": "field",
+                "outboundTag": "block",
+                "domain": [
+                    "geosite:private"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "block",
+                "ip": [
+                    "geoip:private"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "block",
+                "protocol": [
+                    "bittorrent"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "warp",
+                "domain": [
+                    "geosite:category-ru"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "warp",
+                "ip": [
+                    "geoip:ru"
+                ]
+            }
+        ]
+    }
+}

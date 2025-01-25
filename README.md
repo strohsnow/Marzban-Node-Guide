@@ -140,7 +140,7 @@ https://t.me/warpplus
 ```
 Run the installation script:
 ```
-cd && bash <(curl -fsSL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh) w
+cd && sudo bash <(curl -fsSL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh) w
 ```
 ### Install Marzban (Master)
 Run the installation script:
@@ -213,13 +213,13 @@ https://yourdomain.com/SECRET_DASHBOARD_PATH
 ```
 Adjust host settings:
 ```
-reality-master
-address: master_ipv4
-port: 443
+Host: reality-master
+Address: master_ipv4
+Port: 443
 
-reality-node
-address: node_ipv4
-port: 443
+Host: reality-node
+Address: node_ipv4
+Port: 443
 ```
 Adjust node settings:
 ```

@@ -22,3 +22,5 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./nginx-log:/var/log/nginx
       - /etc/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - marzban-node

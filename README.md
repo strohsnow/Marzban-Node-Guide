@@ -72,9 +72,9 @@ Allow HTTPS:
 ```
 sudo ufw allow https comment 'HTTPS'
 ```
-Allow API:
+Allow API (Nodes):
 ```
-sudo ufw allow 62050,62051 comment 'Marzban Node'
+sudo ufw allow proto tcp from master_ipv4 to any port 62050,62051 comment 'Marzban Node'
 ```
 Enable UFW:
 ```

@@ -140,7 +140,7 @@ https://t.me/warpplus
 ```
 Run the installation script:
 ```
-cd && sudo bash <(curl -fsSL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh) w
+cd && wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh w
 ```
 ### Install Marzban (Master)
 Run the installation script:
